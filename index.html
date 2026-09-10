@@ -1,0 +1,452 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="[你的名字]的个人简历与项目作品集">
+  <title>[你的名字]｜[前端/后端/学生]</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f5f8fd;
+      --panel: rgba(255, 255, 255, 0.88);
+      --panel-strong: #ffffff;
+      --text: #142033;
+      --muted: #627089;
+      --accent: #087ea4;
+      --accent-2: #6857d9;
+      --line: rgba(64, 88, 122, 0.16);
+      --shadow: 0 24px 70px rgba(44, 66, 100, 0.11);
+      --radius: 24px;
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      min-width: 320px;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 8% 6%, rgba(30, 174, 219, 0.13), transparent 30rem),
+        radial-gradient(circle at 92% 28%, rgba(104, 87, 217, 0.1), transparent 27rem),
+        var(--bg);
+      font: 16px/1.7 Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    a { color: inherit; }
+
+    .shell {
+      width: min(1120px, calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      border-bottom: 1px solid var(--line);
+      background: rgba(245, 248, 253, 0.84);
+      backdrop-filter: blur(18px);
+    }
+
+    .nav {
+      min-height: 68px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .brand {
+      text-decoration: none;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+    }
+
+    .brand span { color: var(--accent); }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 22px;
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .nav-links a { text-decoration: none; }
+    .nav-links a:hover, .nav-links a:focus-visible { color: var(--text); }
+
+    .hero {
+      min-height: 72vh;
+      display: grid;
+      grid-template-columns: minmax(0, 1.45fr) minmax(280px, 0.75fr);
+      align-items: center;
+      gap: clamp(36px, 8vw, 96px);
+      padding: 92px 0 72px;
+    }
+
+    .eyebrow {
+      margin: 0 0 18px;
+      color: var(--accent);
+      font-weight: 800;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      font-size: 0.78rem;
+    }
+
+    h1, h2, h3, p { margin-top: 0; }
+
+    h1 {
+      margin-bottom: 22px;
+      max-width: 800px;
+      font-size: clamp(3.3rem, 9vw, 7.4rem);
+      line-height: 0.94;
+      letter-spacing: -0.07em;
+    }
+
+    .gradient-text {
+      display: block;
+      color: transparent;
+      background: linear-gradient(105deg, var(--accent), #b5abff 72%);
+      -webkit-background-clip: text;
+      background-clip: text;
+    }
+
+    .intro {
+      max-width: 680px;
+      color: var(--muted);
+      font-size: clamp(1.06rem, 2vw, 1.28rem);
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 32px;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 48px;
+      padding: 0 20px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      color: var(--text);
+      background: var(--panel);
+      text-decoration: none;
+      font-weight: 750;
+      transition: transform 160ms ease, border-color 160ms ease, background 160ms ease;
+    }
+
+    .button.primary {
+      color: #ffffff;
+      border-color: transparent;
+      background: var(--accent);
+    }
+
+    .button:hover, .button:focus-visible {
+      transform: translateY(-2px);
+      border-color: var(--accent);
+    }
+
+    .profile-card {
+      position: relative;
+      overflow: hidden;
+      padding: 28px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: linear-gradient(145deg, rgba(232, 248, 255, 0.98), rgba(240, 237, 255, 0.96));
+      box-shadow: var(--shadow);
+    }
+
+    .profile-card::before {
+      content: "";
+      position: absolute;
+      width: 170px;
+      height: 170px;
+      top: -90px;
+      right: -65px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      filter: blur(4px);
+      opacity: 0.38;
+    }
+
+    .avatar {
+      position: relative;
+      width: 86px;
+      height: 86px;
+      display: grid;
+      place-items: center;
+      margin-bottom: 44px;
+      border: 1px solid rgba(8, 126, 164, 0.18);
+      border-radius: 22px;
+      background: rgba(255, 255, 255, 0.72);
+      font-size: 2rem;
+      font-weight: 900;
+    }
+
+    .profile-card h2 { margin-bottom: 4px; font-size: 1.55rem; }
+    .profile-card > p { color: var(--muted); }
+
+    .quick-facts {
+      display: grid;
+      gap: 13px;
+      margin: 24px 0 0;
+      padding: 20px 0 0;
+      border-top: 1px solid var(--line);
+      list-style: none;
+    }
+
+    .quick-facts li {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      color: var(--muted);
+    }
+
+    .quick-facts strong { color: var(--text); font-weight: 650; }
+
+    main section { scroll-margin-top: 90px; }
+
+    .content-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.5fr) minmax(260px, 0.7fr);
+      gap: 28px;
+      padding-bottom: 100px;
+    }
+
+    .stack { display: grid; gap: 28px; align-content: start; }
+
+    .card {
+      padding: clamp(24px, 4vw, 38px);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--panel);
+      box-shadow: var(--shadow);
+    }
+
+    .section-heading {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 28px;
+    }
+
+    .section-heading h2 { margin: 0; font-size: clamp(1.45rem, 3vw, 2rem); }
+    .section-heading span { color: var(--muted); font-size: 0.84rem; }
+
+    .timeline { display: grid; gap: 28px; }
+
+    .timeline-item {
+      position: relative;
+      padding-left: 24px;
+      border-left: 1px solid var(--line);
+    }
+
+    .timeline-item::before {
+      content: "";
+      position: absolute;
+      left: -5px;
+      top: 8px;
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 0 6px rgba(89, 215, 255, 0.1);
+    }
+
+    .timeline-item h3 { margin-bottom: 4px; font-size: 1.08rem; }
+    .meta { margin-bottom: 12px; color: var(--accent); font-size: 0.88rem; font-weight: 750; }
+    .timeline-item p:last-child, .project p { margin-bottom: 0; color: var(--muted); }
+
+    .project-list { display: grid; gap: 18px; }
+
+    .project {
+      padding: 20px;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: rgba(236, 243, 252, 0.62);
+    }
+
+    .project h3 { margin-bottom: 8px; }
+
+    .tag-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 9px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .tag-list li {
+      padding: 7px 11px;
+      border: 1px solid rgba(8, 126, 164, 0.2);
+      border-radius: 999px;
+      color: #086b8d;
+      background: rgba(8, 126, 164, 0.07);
+      font-size: 0.84rem;
+    }
+
+    .contact-list {
+      display: grid;
+      gap: 13px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .contact-list a {
+      display: block;
+      color: var(--muted);
+      overflow-wrap: anywhere;
+      text-decoration: none;
+    }
+
+    .contact-list a:hover, .contact-list a:focus-visible { color: var(--accent); }
+
+    footer {
+      padding: 28px 0 46px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      text-align: center;
+      font-size: 0.9rem;
+    }
+
+    :focus-visible { outline: 3px solid rgba(8, 126, 164, 0.48); outline-offset: 4px; }
+
+    @media (max-width: 800px) {
+      .nav-links a:not(.button) { display: none; }
+      .hero, .content-grid { grid-template-columns: 1fr; }
+      .hero { min-height: auto; padding-top: 64px; }
+      .profile-card { max-width: 520px; }
+    }
+
+    @media (max-width: 520px) {
+      .shell { width: min(100% - 22px, 1120px); }
+      .nav { min-height: 60px; }
+      .nav-links { gap: 8px; }
+      h1 { font-size: clamp(3rem, 17vw, 4.7rem); }
+      .hero { padding: 48px 0 54px; }
+      .card, .profile-card { border-radius: 18px; }
+      .section-heading { align-items: flex-start; flex-direction: column; }
+    }
+
+    @media print {
+      :root { color-scheme: light; --bg: #fff; --text: #111827; --muted: #475569; --panel: #fff; --line: #d7dee8; --shadow: none; }
+      body { background: #fff; }
+      .topbar, .actions, footer { display: none; }
+      .hero { min-height: auto; padding: 32px 0; }
+      .content-grid { padding-bottom: 0; }
+      .card, .profile-card { break-inside: avoid; }
+      .gradient-text { color: #087fa5; background: none; -webkit-text-fill-color: initial; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <nav class="nav shell" aria-label="主导航">
+      <a class="brand" href="#top">[你的名字]<span>.</span></a>
+      <div class="nav-links">
+        <a href="#experience">经历</a>
+        <a href="#projects">项目</a>
+        <a href="#skills">技能</a>
+        <a class="button" href="mailto:hello@example.com">联系我</a>
+      </div>
+    </nav>
+  </header>
+
+  <main id="top" class="shell">
+    <section class="hero" aria-labelledby="page-title">
+      <div>
+        <p class="eyebrow">Hello, I'm</p>
+        <h1 id="page-title">[你的名字]<span class="gradient-text">[前端/后端/学生]</span></h1>
+        <p class="intro">我专注于用清晰的代码和扎实的工程思维解决真实问题。这里可以用 2–3 句话介绍你的方向、优势，以及你希望寻找的机会。</p>
+        <div class="actions">
+          <a class="button primary" href="#projects">查看项目</a>
+          <button class="button" type="button" onclick="window.print()">打印 / 保存 PDF</button>
+        </div>
+      </div>
+
+      <aside class="profile-card" aria-label="个人概览">
+        <div class="avatar" aria-hidden="true">YN</div>
+        <h2>[你的名字]</h2>
+        <p>[前端/后端/学生]</p>
+        <ul class="quick-facts">
+          <li><span>所在地</span><strong>[城市]</strong></li>
+          <li><span>状态</span><strong>开放新机会</strong></li>
+          <li><span>语言</span><strong>中文 / English</strong></li>
+        </ul>
+      </aside>
+    </section>
+
+    <div class="content-grid">
+      <div class="stack">
+        <section id="experience" class="card">
+          <div class="section-heading"><h2>工作 / 实习经历</h2><span>Experience</span></div>
+          <div class="timeline">
+            <article class="timeline-item">
+              <h3>大学</h3>
+              <p class="meta">2024.06 — 至今 · [城市/远程]</p>
+              <p>用“做了什么 + 如何做 + 带来什么结果”描述经历，例如：优化首屏加载策略，使核心页面加载时间降低 35%。</p>
+            </article>
+            <article class="timeline-item">
+              <h3>[职位名称] · [公司名称]</h3>
+              <p class="meta">2023.07 — 2024.05 · [城市]</p>
+              <p>突出与目标岗位最相关的职责、技术方案和可量化成果，控制在 2–3 行。</p>
+            </article>
+          </div>
+        </section>
+
+        <section id="projects" class="card">
+          <div class="section-heading"><h2>精选项目</h2><span>Selected work</span></div>
+          <div class="project-list">
+            <article class="project">
+              <h3>[项目名称一]</h3>
+              <p>一句话说明项目解决的问题，再补充你负责的核心功能、使用的技术与最终结果。可将标题改为项目链接。</p>
+            </article>
+            <article class="project">
+              <h3>[项目名称二]</h3>
+              <p>展示另一个能体现能力差异的项目，例如工程化、性能优化、数据处理、交互设计或团队协作。</p>
+            </article>
+          </div>
+        </section>
+      </div>
+
+      <aside class="stack">
+        <section id="skills" class="card">
+          <div class="section-heading"><h2>技术栈</h2><span>Skills</span></div>
+          <ul class="tag-list" aria-label="技能列表">
+            <li>[技能 1]</li><li>[技能 2]</li><li>[技能 3]</li>
+            <li>[技能 4]</li><li>[技能 5]</li><li>[技能 6]</li>
+          </ul>
+        </section>
+
+        <section class="card">
+          <div class="section-heading"><h2>教育背景</h2><span>Education</span></div>
+          <h3>[学校名称]</h3>
+          <p class="meta">[专业 / 学位] · [起止年份]</p>
+          <p style="color: var(--muted); margin-bottom: 0;">可补充主修课程、奖项或与目标职位相关的校园经历。</p>
+        </section>
+
+        <section class="card">
+          <div class="section-heading"><h2>联系我</h2><span>Contact</span></div>
+          <ul class="contact-list">
+            <li><a href="mailto:hello@example.com">hello@example.com</a></li>
+            <li><a href="https://github.com/yourname">github.com/yourname</a></li>
+            <li><a href="https://www.linkedin.com/in/yourname">linkedin.com/in/yourname</a></li>
+          </ul>
+        </section>
+      </aside>
+    </div>
+  </main>
+
+  <footer><div class="shell">© 2026 [你的名字] · 用 HTML 与 CSS 构建</div></footer>
+</body>
+</html>
